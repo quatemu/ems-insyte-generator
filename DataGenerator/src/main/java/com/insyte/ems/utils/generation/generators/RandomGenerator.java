@@ -18,7 +18,6 @@ public class RandomGenerator extends Generator {
             }
         }
         catch (NullPointerException ex){
-            //System.err.println(ex.);
             ex.printStackTrace();
             result = null;
         }
