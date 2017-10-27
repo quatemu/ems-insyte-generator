@@ -1,7 +1,7 @@
 package com.insyte.ems.utils.generation.generators;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.List;
 
 public abstract class Generator {
     protected LocalDateTime BeginDateTime;
@@ -14,33 +14,29 @@ public abstract class Generator {
     protected double MinValue = 0;
     protected double MaxValue = 1;
 
-    protected HashSet<String> UsingVariables = new HashSet<>();
-
     public void setBeginDateTime(LocalDateTime beginDateTime) {
-        BeginDateTime = beginDateTime;
-        CurrentDateTime = BeginDateTime;
+        this.BeginDateTime = beginDateTime;
+        this.CurrentDateTime = this.BeginDateTime;
     }
 
     public void setEndDateTime(LocalDateTime endDateTime) {
-        EndDateTime = endDateTime;
+        this.EndDateTime = endDateTime;
     }
 
-    public void setStep(int step) {
-        Step = step;
-    }
+    public void setStep(int step) { this.Step = step; }
 
     public void setMinValue(double minValue) {
-        MinValue = minValue;
+        this.MinValue = minValue;
     }
-
-    public void setMaxValue(double maxValue) {
-        MaxValue = maxValue;
-    }
+    public void setMaxValue(double maxValue) { this.MaxValue = maxValue; }
 
     protected void incDateTime(){
-        CurrentDateTime = CurrentDateTime.plusSeconds(Step);
+        this.CurrentDateTime = this.CurrentDateTime.plusSeconds(this.Step);
     }
 
-    public abstract String getNext();
-    //public abstract StringBuilder getAll();
+    public abstract GenerationResult getNext();
+    public abstract String getNextString();
+
+    public abstract List<GenerationResult> getAll();
+    public abstract StringBuilder getAllStrings();
 }

@@ -3,7 +3,6 @@ package com.insyte.ems.utils.generation;
 import com.insyte.ems.utils.generation.generators.Generator;
 import com.insyte.ems.utils.generation.generators.RandomGenerator;
 import org.json.JSONObject;
-
 import java.time.LocalDateTime;
 
 public class GeneratorBuilder {

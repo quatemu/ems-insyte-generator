@@ -18,8 +18,8 @@ public class MainApp {
             }
             GeneratorBuilder gb = new GeneratorBuilder();
             Generator generator = gb.getGenerator(sb.toString());
-            String value = null;
-            while((value = generator.getNext()) != null){
+            String value;
+            while((value = generator.getNextString()) != null){
                 System.out.println(value);
             }
         }
