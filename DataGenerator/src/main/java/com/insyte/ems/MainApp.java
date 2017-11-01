@@ -7,7 +7,7 @@ import java.io.FileReader;
 
 public class MainApp {
     public static void main(String[] args){
-        try(BufferedReader br = new BufferedReader(new FileReader("../generator-config.json"))) {
+        try(BufferedReader br = new BufferedReader(new FileReader("../digital_generator-config.json"))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
