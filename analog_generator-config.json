@@ -1,7 +1,7 @@
 {
 	"Generator_Type__COMMENT" : "One from the list [Random, Analog, Digital]",
 	"Generator_Type" : "Analog",
-	"Formula" : "y/(x*x)",
+	"Formula" : "x+y)",
 	"Variables" : [
 		{
 			"Name" : "x",
