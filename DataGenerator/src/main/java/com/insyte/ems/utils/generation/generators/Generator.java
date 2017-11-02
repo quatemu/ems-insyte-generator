@@ -1,6 +1,7 @@
 package com.insyte.ems.utils.generation.generators;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +10,11 @@ public abstract class Generator {
     protected LocalDateTime currentDateTime;
     protected LocalDateTime endDateTime;
 
-    protected int timeStep = 1;
-    protected String delimiter = "\t";
+    protected long timeStep = 1;
+    protected String delimiter = ";";
 
-    protected double minValue = 0;
-    protected double maxValue = 1;
 
-    public abstract GenerationResult getNext();
-    public abstract String getNextString();
+    protected abstract double getNextValue();
 
     public void setBeginDateTime(LocalDateTime beginDateTime) {
         if(beginDateTime == null){
@@ -37,7 +35,7 @@ public abstract class Generator {
         }
     }
 
-    public void setTimeStep(int timeStep) {
+    public void setTimeStep(long timeStep) {
         if(timeStep < 0){
             throw new IllegalArgumentException("В качестве шага указано отрицательное значение");
         }
@@ -46,20 +44,28 @@ public abstract class Generator {
         }
     }
     public void setDelimiter(String delimiter) {
-        if(delimiter == null){
-            throw new IllegalArgumentException("В качестве разделителя используется null-объект");
-        }
-        else {
+        if(delimiter != null){
             this.delimiter = delimiter;
         }
     }
 
-    public void setMinValue(double minValue) { this.minValue = minValue; }
-    public void setMaxValue(double maxValue) { this.maxValue = maxValue; }
-
-
     protected void incDateTime(){
         this.currentDateTime = this.currentDateTime.plusSeconds(this.timeStep);
+    }
+
+    public GenerationResult getNext(){
+        GenerationResult result = null;
+        try{
+            if(!currentDateTime.isAfter(endDateTime)) {
+                result = new GenerationResult(currentDateTime, getNextValue());
+                incDateTime();
+            }
+        }
+        catch (NullPointerException ex){
+            ex.printStackTrace();
+            result = null;
+        }
+        return result;
     }
 
     protected List<GenerationResult> getAll() {
@@ -69,6 +75,21 @@ public abstract class Generator {
             results.add(value);
         }
         return results;
+    }
+
+    public String getNextString() {
+        String result = null;
+        try{
+            if(!currentDateTime.isAfter(endDateTime)) {
+                result = currentDateTime.format(DateTimeFormatter.ISO_DATE_TIME) + delimiter + String.valueOf(getNextValue());
+                incDateTime();
+            }
+        }
+        catch (NullPointerException ex){
+            ex.printStackTrace();
+            result = null;
+        }
+        return result;
     }
 
     protected StringBuilder getAllStrings() {

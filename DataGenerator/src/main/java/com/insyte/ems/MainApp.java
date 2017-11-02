@@ -7,7 +7,13 @@ import java.io.FileReader;
 
 public class MainApp {
     public static void main(String[] args){
-        try(BufferedReader br = new BufferedReader(new FileReader("../digital_generator-config.json"))) {
+        //test("../random_generator-config.json");
+        //test("../analog_generator-config.json");
+        test("../digital_generator-config.json");
+    }
+
+    public static void test(String fileName){
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
@@ -18,6 +24,7 @@ public class MainApp {
             }
             GeneratorBuilder gb = new GeneratorBuilder();
             Generator generator = gb.getGenerator(sb.toString());
+
             String value;
             while((value = generator.getNextString()) != null){
                 System.out.println(value);

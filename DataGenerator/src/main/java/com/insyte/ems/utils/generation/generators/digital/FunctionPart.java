@@ -1,4 +1,4 @@
-package com.insyte.ems.utils.generation.generators;
+package com.insyte.ems.utils.generation.generators.digital;
 
 import java.time.LocalDateTime;
 
