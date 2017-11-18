@@ -9,7 +9,6 @@ import javax.script.ScriptException;
 public class AnalogGenerator extends Generator {
     private List<Variable> variables;
     private String formula;
-    private long countOfSteps;
     private ScriptEngine engine = null;
 
     public AnalogGenerator(String formula, List<Variable> variables, long countOfSteps){
@@ -24,7 +23,6 @@ public class AnalogGenerator extends Generator {
         } else {
             this.formula = formula;
             this.variables = variables;
-            this.countOfSteps = countOfSteps;
             init();
         }
 

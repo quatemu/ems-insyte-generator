@@ -68,7 +68,7 @@ public abstract class Generator {
         return result;
     }
 
-    protected List<GenerationResult> getAll() {
+    public List<GenerationResult> getAll() {
         List<GenerationResult> results = new ArrayList<>();
         GenerationResult value;
         while((value = getNext()) != null){
@@ -92,7 +92,7 @@ public abstract class Generator {
         return result;
     }
 
-    protected StringBuilder getAllStrings() {
+    public StringBuilder getAllStrings() {
         StringBuilder builder = new StringBuilder();
         String value;
         while((value = getNextString()) != null){
